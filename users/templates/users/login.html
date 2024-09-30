@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %} {% load crispy_forms_tags %} {% block content %}
+
+<div class="content-section">
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="mx-auto border-bottom mt-3">Login</legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-primary mb-2" type="submit">Login</button>
+    </div>
+  </form>
+
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Need an account?
+      <a href="{% url 'register' %}" class="ml-2">Sign Up Now</a>
+    </small>
+  </div>
+</div>
+
+{% endblock content %}

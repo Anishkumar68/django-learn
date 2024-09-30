@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %} {% block content %}
+<h1>Blog Updates</h1>
+
+<style>
+  .custom-card {
+    width: 100%; /* Full width */
+    max-width: 1000px; /* Adjust to desired width */
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="#">Home</a>
+        <a class="list-group-item list-group-item-action" href="#">About</a>
+      </div>
+    </nav>
+
+    <!-- Content Area -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+      <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4 mb-4">
+          <div class="card rounded float-left">
+            <img
+              src="https://via.placeholder.com/150"
+              class="card-img-top"
+              alt="Card Image "
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ post.Title }}</h5>
+              <p class="card-text">{{ post.rich_content|truncatewords:30 }}</p>
+              <p class="card-text">
+                <small class="text-muted"
+                  >{{ post.published_at | date:"F d, Y" }}</small
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- Additional static cards can go here if needed -->
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% if title %} {{title}} {% else %} Blogapp {% endif %}</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Center the search form -->
+            <div class="mx-auto d-flex">
+              <form class="d-flex" style="width: 300px">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+
+            <!-- Links and buttons -->
+            <div class="ms-3 d-flex align-items-center">
+              <a href="{% url 'home' %}" class="nav-link">Home</a>
+              <a href="{% url  'about' %}" class="nav-link">About</a>
+
+              {% if user.is_authenticated %} {% comment %}
+              <a class="btn btn-outline-primary ms-2" href="{% url 'logout' %}"
+                >log out</a
+              >
+              {% endcomment %} {% else %}
+              <a href="{% url 'login' %}" class="btn btn-primary ms-2">Login</a>
+              <a href="{% url 'register' %}" class="btn btn-secondary ms-2"
+                >Sign Up</a
+              >
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- {% comment %} main content - blogs {% endcomment %} -->
+
+    <div class="container-sm">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{message.tags}}">{{message}}</div>
+
+      {% endfor %} {% endif %} {% block content %} {% endblock content %}
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
