@@ -30,7 +30,7 @@
               alt="Card Image "
             />
             <div class="card-body">
-              <h5 class="card-title">{{ post.Title }}</h5>
+              <h5 class="card-title">{{ post.Title|title }}</h5>
               <p class="card-text">{{ post.rich_content|truncatewords:30 }}</p>
               <p class="card-text">
                 <small class="text-muted"

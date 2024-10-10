@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -28,3 +29,10 @@ def logout_view(request):
     logout(request)
 
     return render(request, "users/logout.html", {"title": "logged_out"})
+
+
+@login_required  # decorator wrap
+def profile(request):
+    """Profile View for user"""
+    username = request.user.username
+    return render(request, "users/profile.html", {"titile": f"Profile-{username}"})
