@@ -24,19 +24,19 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(r"^register/$", user_views.register, name="register"),
+    path("register/", user_views.register, name="register"),
     path(
-        r"^login/$",
+        "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),
         name="login",
     ),
     path(
-        r"logout/$",
+        "logout/",
         user_views.logout_view,
         name="logout",
     ),
     path(
-        r"profile/$",
+        "profile/",
         user_views.profile,
         name="profile",
     ),
