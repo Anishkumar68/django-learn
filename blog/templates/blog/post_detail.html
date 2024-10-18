@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %} {% block content %}
+<style>
+  .custom-card {
+    width: 100%; /* Full width */
+    max-width: 1000px; /* Adjust to desired width */
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .author-info img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+
+  .author-name {
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+</style>
+<div class="container-fluid">
+  <h2 class="card-title">{{ post.Title|title }}</h2>
+  <!-- Post Date -->
+  <p class="card-text">
+    <small class="text-muted">{{ post.published_at | date:"F d, Y" }}</small>
+  </p>
+  <!-- Author Info -->
+  <div class="author-info">
+    <div class="d-flex align-items-center">
+      <!-- Author's Profile Image -->
+      <img
+        src="{{ object.author.profile.image.url }}"
+        alt="{{ object.author.username }}"
+        class="rounded-circle"
+        style="width: 60px; height: 60px"
+      />
+      <!-- Author's Name -->
+      <span class="card-text">{{ object.author.username }}</span>
+    </div>
+  </div>
+
+  <p class="content">{{object.rich_content}}</p>
+</div>
+{% endblock content %}

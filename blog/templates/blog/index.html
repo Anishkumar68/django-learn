@@ -6,15 +6,39 @@
     width: 100%; /* Full width */
     max-width: 1000px; /* Adjust to desired width */
   }
-</style>
 
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .author-info img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .author-name {
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+</style>
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
     <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action" href="#">Home</a>
-        <a class="list-group-item list-group-item-action" href="#">About</a>
+        <a
+          class="list-group-item list-group-item-action"
+          href="{% url 'home' %}"
+          >Home</a
+        >
+        <a
+          class="list-group-item list-group-item-action"
+          href="{% url 'about' %}"
+          >About</a
+        >
       </div>
     </nav>
 
@@ -22,21 +46,49 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
       <div class="row">
         {% for post in posts %}
-        <div class="col-md-4 mb-4">
-          <div class="card rounded float-left">
-            <img
-              src="https://via.placeholder.com/150"
-              class="card-img-top"
-              alt="Card Image "
-            />
-            <div class="card-body">
-              <h5 class="card-title">{{ post.Title|title }}</h5>
-              <p class="card-text">{{ post.rich_content|truncatewords:30 }}</p>
-              <p class="card-text">
-                <small class="text-muted"
-                  >{{ post.published_at | date:"F d, Y" }}</small
-                >
-              </p>
+        <div class="col-md-6 mb-4">
+          <!-- Adjusted to have two cards per row -->
+
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <!-- Post Image -->
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="..." />
+              </div>
+              <!-- Post Content -->
+
+              <div class="col-md-8">
+                <div class="card-body">
+                  <!-- Post Title -->
+                  <a href="{% url 'post-detail' post.id %}">
+                    <h5 class="card-title">{{ post.Title|title }}</h5>
+                    <!-- Post Content (Truncated) -->
+                    <p class="card-text">
+                      {{ post.rich_content|truncatewords:30 }}
+                    </p>
+                  </a>
+                  <!-- Post Date -->
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >{{ post.published_at | date:"F d, Y" }}</small
+                    >
+                  </p>
+                  <!-- Author Info -->
+                  <div class="author-info">
+                    <div class="d-flex align-items-center">
+                      <!-- Author's Profile Image -->
+                      <img
+                        src="{{ post.author.profile.image.url }}"
+                        alt="{{ post.author.username }}"
+                        class="rounded-circle"
+                        style="width: 20px; height: 20px"
+                      />
+                      <!-- Author's Name -->
+                      <span class="card-text">{{ post.author.username }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

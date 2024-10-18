@@ -1,12 +1,23 @@
 from django.shortcuts import render
 import os
 from blog.models import Post
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+)
 
 
 # Create your views here.
-def home(request):
-    posts = Post.objects.all()
-    return render(request, "blog/index.html", {"posts": posts})
+class PostListView(ListView):
+    model = Post
+    template_name = "blog/index.html"
+    context_object_name = "posts"
+    ordering = ["-published_at"]
+
+
+class PostDetailedView(DetailView):
+    model = Post
 
 
 def about(request):
