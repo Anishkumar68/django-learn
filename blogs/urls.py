@@ -40,6 +40,18 @@ urlpatterns = [
         user_views.profile,
         name="profile",
     ),
+    path(
+        "password-reset/",
+        auth_views.password_reset.as_view(template_name="users/password_reset.html"),
+        name="password_reset",
+    ),
+    path(
+        "password-reset-confirm/<uidb64>/<token>/",
+        auth_views.password_reset_done.as_view(
+            template_name="users/password_reset_done.html"
+        ),
+        name="password_reset_done",
+    ),
     path("", include("blog.urls")),
 ]
 
