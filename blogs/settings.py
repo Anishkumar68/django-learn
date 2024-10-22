@@ -140,3 +140,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
+
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587  # Use 465 for SSL
+EMAIL_USE_TLS = True  # Use True for TLS, False for SSL
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")  # Your Gmail address
+EMAIL_HOST_PASSWORD = os.getenv(
+    "EMAIL_HOST_PASSWORD"
+)  # Your Gmail password or App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Optional: Set the default sender email
